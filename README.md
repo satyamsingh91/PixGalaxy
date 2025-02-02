@@ -1,0 +1,1 @@
+PixGalaxy is a Pinterest-like image-sharing platform where users can discover, save, and share creative images. Built with Node.js, Express, MongoDB, Google Auth, Multer, and Tailwind CSS, this project allows users to upload their favorite images and explore an inspiring collection of visuals.
