@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Register</title>
+</head>
+<body class="bg-gray-50">
+  <div class="flex justify-center items-center min-h-screen">
+    <div class="bg-white shadow-lg rounded-lg p-8 max-w-sm w-full">
+      <h1 class="text-2xl font-bold text-center text-gray-800 mb-4">Sign Up for PixGalaxy</h1>
+      <form action="/register" method="POST" class="space-y-4">
+        <div>
+          <label for="name" class="block text-sm font-medium text-gray-700">name</label>
+          <input type="text" id="name" name="name" required
+            class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm focus:ring-pink-500 focus:border-pink-500 sm:text-sm">
+        </div>
+        <div>
+          <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+          <input type="email" id="email" name="email" required
+            class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm focus:ring-pink-500 focus:border-pink-500 sm:text-sm">
+        </div>
+        <div>
+          <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+          <input type="password" id="password" name="password" required
+            class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm focus:ring-pink-500 focus:border-pink-500 sm:text-sm">
+        </div>
+        <button type="submit"
+          class="w-full bg-pink-600 text-white py-2 rounded-lg hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500">
+          Sign Up
+        </button>
+        <div class="text-center text-gray-500 text-sm">
+          Or
+        </div>
+        <a href="/auth/google" class="block w-full text-center py-2 border rounded-lg text-gray-700 bg-gray-50 hover:bg-gray-100">
+          <img src="https://img.icons8.com/color/16/000000/google-logo.png" class="inline-block mr-2" alt="Google logo">
+          Continue with Google
+        </a>
+      </form>
+      <p class="mt-4 text-sm text-center text-gray-500">Already have an account? 
+        <a href="/login" class="text-pink-600 hover:underline">Log In</a>
+      </p>
+    </div>
+  </div>
+</body>
+</html>
