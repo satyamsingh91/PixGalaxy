@@ -1,48 +1,200 @@
-<div
-  class="columns-2 sm:columns-3 md:columns-4 lg:columns-5 gap-4 sm:gap-6 space-y-4"
->
-  <% posts.forEach(function (elem) { %>
-  <div
-    class="break-inside-avoid bg-white shadow-md rounded-lg overflow-hidden hover:shadow-lg transition"
-  >
-    <!-- Image Section -->
-    <div class="w-full h-40 sm:h-48 md:h-56 bg-gray-200">
-      <img
-        src="<%= elem.image %>"
-        alt="Pin Image"
-        class="w-full h-full object-cover"
-      />
-    </div>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pinterest Clone</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-gray-100">
+    <!-- Header/Navbar -->
+    <header class="bg-white shadow-md">
+      <div
+        class="container mx-auto flex justify-between items-center py-4 px-4 sm:px-6"
+      >
+        <!-- Left Section: Navigation -->
+        <div class="flex items-center space-x-4 sm:space-x-6">
+          <a href="#" class="text-red-500 font-bold text-xl">PixGalaxy</a>
+          <a
+            href="/createpin"
+            class="text-gray-700 hover:text-black hidden sm:block"
+            >Create</a
+          >
+        </div>
 
-    <!-- Title & Info Section -->
-    <div class="p-3">
-      <h5
-        class="text-sm sm:text-base text-gray-800 truncate"
-        title="<%= elem.title %>"
-      >
-        <strong>Title:</strong> <%= elem.title %>
-      </h5>
-      <p
-        class="mt-1 text-xs sm:text-sm text-gray-600 truncate"
-        title="<%= elem.user.name %>"
-      >
-        <strong>User:</strong> <%= elem.user.name %>
-      </p>
+        <!-- Right Section: Search and Actions -->
+        <div class="hidden sm:flex items-center space-x-4 lg:space-x-6">
+          <a href="/show/posts"
+            ><button
+              class="text-gray-700 px-3 py-1 sm:px-4 sm:py-2 hover:bg-gray-100 rounded-md transition"
+            >
+              Your Pins
+            </button></a
+          >
+          <a href="/feed"
+            ><button
+              class="text-gray-700 px-3 py-1 sm:px-4 sm:py-2 hover:bg-gray-100 rounded-md transition"
+            >
+              Feed
+            </button></a
+          >
+          <a href="/profile"
+            ><button
+              class="text-gray-700 px-3 py-1 sm:px-4 sm:py-2 hover:bg-gray-100 rounded-md transition"
+            >
+              Profile
+            </button></a
+          >
+          <a href="/logout"
+            ><button
+              class="text-gray-700 px-3 py-1 sm:px-4 sm:py-2 hover:bg-gray-100 rounded-md transition"
+            >
+              Logout
+            </button></a
+          >
+        </div>
 
-      <!-- Delete Button -->
-      <form
-        action="/delete-pin/<%= elem._id %>"
-        method="POST"
-        class="mt-2 text-right"
-      >
+        <!-- Hamburger Menu for Mobile -->
         <button
-          type="submit"
-          class="text-red-500 hover:text-red-700 text-sm sm:text-base"
+          id="menu-toggle"
+          class="sm:hidden text-gray-700 focus:outline-none"
         >
-          <i class="fas fa-trash-alt"></i> Delete
+          <i class="fas fa-bars text-2xl"></i>
         </button>
-      </form>
+      </div>
+
+      <!-- Mobile Menu (Hidden by Default) -->
+      <div id="mobile-menu" class="sm:hidden hidden bg-white shadow-md">
+        <div class="flex flex-col items-center space-y-4 py-4">
+          <a href="/createpin"
+            ><button
+              class="text-gray-700 w-full text-sm py-2 hover:bg-gray-100 rounded-md transition"
+            >
+              Create
+            </button></a
+          >
+          <a href="/show/posts"
+            ><button
+              class="text-gray-700 w-full text-sm py-2 hover:bg-gray-100 rounded-md transition"
+            >
+              Your Pins
+            </button></a
+          >
+          <a href="/feed"
+            ><button
+              class="text-gray-700 w-full text-sm py-2 hover:bg-gray-100 rounded-md transition"
+            >
+              Feed
+            </button></a
+          >
+          <a href="/profile"
+            ><button
+              class="text-gray-700 w-full text-sm py-2 hover:bg-gray-100 rounded-md transition"
+            >
+              Profile
+            </button></a
+          >
+          <a href="/logout"
+            ><button
+              class="text-gray-700 w-full text-sm py-2 hover:bg-gray-100 rounded-md transition"
+            >
+              Logout
+            </button></a
+          >
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container mx-auto mt-10 px-4 sm:px-10">
+      <% if (posts.length === 0) { %>
+      <!-- Message when no posts exist -->
+      <div
+        class="flex flex-col items-center justify-center h-64 sm:h-80 text-center"
+      >
+        <img
+          src="/images/empty.png"
+          alt="No Pins Found"
+          class="w-24 sm:w-32 mb-4"
+        />
+        <h2 class="text-lg sm:text-xl font-semibold text-gray-700">
+          No Pins Found
+        </h2>
+        <p class="text-sm sm:text-base text-gray-500">
+          Start by creating a new pin to share your ideas with the world!
+        </p>
+        <a
+          href="/createpin"
+          class="mt-4 bg-red-500 text-white px-4 py-2 rounded-full hover:bg-red-600 transition"
+          >Create a Pin</a
+        >
+      </div>
+      <% } else { %>
+      <!-- Cards Section -->
+      <div
+        class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6"
+      >
+        <% posts.forEach(function(elem) { %>
+        <div
+          class="card bg-white shadow-md rounded-lg overflow-hidden hover:shadow-lg transition w-full"
+        >
+          <!-- Image Section -->
+          <div class="w-full h-40 sm:h-48 md:h-56 lg:h-60 bg-gray-200">
+            <img
+              src="<%= elem.image %>"
+              alt="Pin Image"
+              class="w-full h-full object-cover"
+            />
+          </div>
+
+          <!-- Title & Info Section -->
+          <div class="p-3">
+            <h5
+              class="text-sm sm:text-base text-gray-800 truncate"
+              title="<%= elem.title %>"
+            >
+              <strong>Title:</strong> <%= elem.title %>
+            </h5>
+            <p
+              class="mt-1 text-xs sm:text-sm text-gray-600 truncate"
+              title="<%= elem.user.name %>"
+            >
+              <strong>User:</strong> <%= elem.user.name %>
+            </p>
+
+            <!-- Delete Button -->
+            <form
+              action="/delete-pin/<%= elem._id %>"
+              method="POST"
+              class="mt-2 text-right"
+            >
+              <button
+                type="submit"
+                class="text-red-500 hover:text-red-700 text-sm sm:text-base"
+              >
+                <i class="fas fa-trash-alt"></i> Delete
+              </button>
+            </form>
+          </div>
+        </div>
+        <% }) %>
+      </div>
+      <% } %>
     </div>
-  </div>
-  <% }) %>
-</div>
+
+    <!-- JavaScript for Menu Toggle -->
+    <script>
+      // Toggle Mobile Menu
+      document
+        .querySelector("#menu-toggle")
+        .addEventListener("click", function () {
+          const menu = document.querySelector("#mobile-menu");
+          menu.classList.toggle("hidden");
+        });
+    </script>
+  </body>
+</html>
