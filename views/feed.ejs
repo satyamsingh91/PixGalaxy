@@ -140,10 +140,10 @@
       >
         <% posts.forEach(function(elem) { %>
         <div
-          class="card w-full sm:w-48 md:w-56 lg:w-60 bg-white shadow-md rounded-lg overflow-hidden hover:shadow-lg transition"
+          class="card bg-white shadow-md rounded-lg overflow-hidden hover:shadow-lg transition w-full"
         >
           <!-- Image Section -->
-          <div class="w-full h-32 sm:h-40 bg-zinc-100">
+          <div class="w-full h-40 sm:h-48 md:h-56 lg:h-60 bg-gray-200">
             <img
               src="<%= elem.image %>"
               alt="Pin Image"
@@ -151,7 +151,7 @@
             />
           </div>
 
-          <!-- Title Section -->
+          <!-- Title & Info Section -->
           <div class="p-3">
             <h5
               class="text-sm sm:text-base text-gray-800 truncate"
@@ -159,13 +159,12 @@
             >
               <strong>Title:</strong> <%= elem.title %>
             </h5>
-            <!-- User Section -->
-            <h3
+            <p
               class="mt-1 text-xs sm:text-sm text-gray-600 truncate"
               title="<%= elem.user.name %>"
             >
               <strong>User:</strong> <%= elem.user.name %>
-            </h3>
+            </p>
 
             <!-- Delete Button -->
             <form
