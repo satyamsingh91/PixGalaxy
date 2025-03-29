@@ -1,77 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Profile Page</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
-</head>
-<body class="bg-gray-100">
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-gray-100">
     <header class="bg-white shadow-md">
-        <div class="container mx-auto flex justify-between items-center py-4 px-6">
-            <div class="flex items-center space-x-6">
-                <a href="#" class="text-red-500 font-bold text-xl">PixGalaxy</a>
-                <a href="/createpin" class="text-gray-700 hover:text-black">Create</a>
-            </div>
-            <div class="flex items-center space-x-6">
-                <a href="/show/posts"><button class="text-gray-700">Your Pins</button></a>
-                <a href="/feed"><button class="text-gray-700">Feed</button></a>
-                <a href="/profile"><button class="text-gray-700">Profile</button></a>
-                <a href="/logout"><button class="text-gray-700">Logout</button></a>
-            </div>
+      <div
+        class="container mx-auto flex justify-between items-center py-4 px-6"
+      >
+        <div class="flex items-center space-x-6">
+          <a href="#" class="text-red-500 font-bold text-xl">PixGalaxy</a>
+          <a href="/createpin" class="text-gray-700 hover:text-black">Create</a>
         </div>
+        <div class="flex items-center space-x-6">
+          <a href="/show/posts"
+            ><button class="text-gray-700">Your Pins</button></a
+          >
+          <a href="/feed"><button class="text-gray-700">Feed</button></a>
+          <a href="/profile"><button class="text-gray-700">Profile</button></a>
+          <a href="/logout"><button class="text-gray-700">Logout</button></a>
+        </div>
+      </div>
     </header>
 
     <main class="container mx-auto mt-8 px-6">
-        <div class="text-center relative">
-            <div class="w-24 h-24 mx-auto bg-gray-300 rounded-full overflow-hidden relative">
-                <!-- Display profile image correctly -->
-                <img 
-                    src="<%= user.image.startsWith('http') ? user.image : '/images/' + user.image %>"  
-                    alt="Profile Image"
-                    class="w-full h-full object-cover"
-                />
-                
-                <!-- Edit Profile Picture Icon -->
-                <button 
-                    id="uploadicon"
-                    class="absolute bottom-0 right-0 bg-white text-gray-700 rounded-full p-2 shadow-lg hover:bg-gray-200"
-                    title="Edit Profile Picture"
-                >
-                    <i class="ri-pencil-line"></i>
-                </button>
+      <div class="text-center relative">
+        <div
+          class="w-24 h-24 mx-auto bg-gray-300 rounded-full overflow-hidden relative"
+        >
+          <!-- Display profile image correctly -->
+          <img
+            src="<%= user.image.startsWith('http') ? user.image : '/images/' + user.image %>"
+            alt="Profile Image"
+            class="w-full h-full object-cover"
+          />
 
-                <!-- Hidden Form for Uploading Profile Image -->
-                <div id="uploadform" class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
-                    <form action="/fileupload" method="post" enctype="multipart/form-data">
-                        <input type="file" name="profileImage" class="hidden">
-                    </form>
-                </div>
-            </div>
-            <h1 class="text-2xl font-bold mt-4"><%= user.name %></h1>
-            <p class="text-gray-600"><%= user.email %></p>
-        </div>
+          <!-- Edit Profile Picture Icon -->
+          <button
+            id="uploadicon"
+            class="absolute bottom-0 right-0 bg-white text-gray-700 rounded-full p-2 shadow-lg hover:bg-gray-200"
+            title="Edit Profile Picture"
+          >
+            <i class="ri-pencil-line"></i>
+          </button>
 
-        <div class="mt-8">
-            <div class="flex justify-center border-b">
-                <button class="px-4 py-2 text-red-500 border-b-2 border-red-500">Created</button>
-            </div>
-            <div class="text-center mt-4">
-                <a href="/createpin"><button class="bg-red-500 text-white px-4 py-2 rounded-full mt-4">Create Pin</button></a>
-            </div>
+          <!-- Hidden Form for Uploading Profile Image -->
+          <div
+            id="uploadform"
+            class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden"
+          >
+            <form
+              action="/fileupload"
+              method="post"
+              enctype="multipart/form-data"
+            >
+              <input type="file" name="profileImage" class="hidden" />
+            </form>
+          </div>
         </div>
+        <h1 class="text-2xl font-bold mt-4"><%= user.name %></h1>
+        <p class="text-gray-600"><%= user.email %></p>
+      </div>
+
+      <div class="mt-8">
+        <div class="flex justify-center border-b">
+          <button class="px-4 py-2 text-red-500 border-b-2 border-red-500">
+            Created
+          </button>
+        </div>
+        <div class="text-center mt-4">
+          <a href="/createpin"
+            ><button class="bg-red-500 text-white px-4 py-2 rounded-full mt-4">
+              Create Pin
+            </button></a
+          >
+        </div>
+      </div>
     </main>
 
     <script>
-        document.querySelector("#uploadicon").addEventListener("click", function () {
-            const fileInput = document.querySelector("#uploadform input[type='file']");
-            fileInput.click();
+      document
+        .querySelector("#uploadicon")
+        .addEventListener("click", function () {
+          const fileInput = document.querySelector(
+            "#uploadform input[type='file']"
+          );
+          fileInput.click();
         });
 
-        document.querySelector("#uploadform input[type='file']").addEventListener("change", function () {
-            this.closest("form").submit();
+      document
+        .querySelector("#uploadform input[type='file']")
+        .addEventListener("change", function () {
+          this.closest("form").submit();
         });
     </script>
-</body>
+  </body>
 </html>
