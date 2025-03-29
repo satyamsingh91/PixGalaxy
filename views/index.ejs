@@ -1,92 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pinterest Clone</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
+    /* Hide mobile menu by default */
+    #mobile-menu {
+      display: none;
+    }
+
     /* Custom CSS to restrict scrolling */
     body {
-      overflow: hidden;
+      overflow-x: hidden;
     }
   </style>
 </head>
+
 <body class="bg-gray-100 h-screen">
-  <!-- Navbar -->
   <nav class="bg-white shadow-md">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between h-16">
-        <div class="flex items-center">
-          <!-- Logo -->
-          <a href="/" class="flex-shrink-0 flex items-center">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Pinterest-logo.png" alt="Pinterest Logo" class="h-8">
-          </a>
-          <!-- Menu -->
-          <div class="hidden sm:-my-px sm:ml-10 sm:flex space-x-8">
-            <a href="#" class="text-gray-900 hover:text-gray-700 px-3 py-2 text-sm font-medium">Today</a>
-            <a href="#" class="text-gray-900 hover:text-gray-700 px-3 py-2 text-sm font-medium">Watch</a>
-            <a href="#" class="text-gray-900 hover:text-gray-700 px-3 py-2 text-sm font-medium">Explore</a>
-          </div>
+      <div class="flex justify-between h-16 items-center">
+        <a href="/" class="flex-shrink-0 flex items-center">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Pinterest-logo.png" alt="Pinterest Logo"
+            class="h-8">
+        </a>
+
+        <div class="hidden sm:flex sm:space-x-8">
+          <a href="#" class="text-gray-900 hover:text-gray-700 px-3 py-2 text-sm font-medium">Today</a>
+          <a href="#" class="text-gray-900 hover:text-gray-700 px-3 py-2 text-sm font-medium">Watch</a>
+          <a href="#" class="text-gray-900 hover:text-gray-700 px-3 py-2 text-sm font-medium">Explore</a>
         </div>
 
-        <!-- Right menu -->
-        <div class="hidden sm:ml-6 sm:flex sm:items-center space-x-4">
+        <div class="hidden sm:flex sm:items-center space-x-4">
           <a href="#" class="text-gray-900 hover:text-gray-700 text-sm font-medium">About</a>
           <a href="#" class="text-gray-900 hover:text-gray-700 text-sm font-medium">Business</a>
           <a href="#" class="text-gray-900 hover:text-gray-700 text-sm font-medium">Blog</a>
           <a href="/login" class="bg-red-500 text-white px-4 py-2 rounded-lg font-medium">Log in</a>
           <a href="/register" class="bg-gray-200 px-4 py-2 rounded-lg font-medium">Register</a>
         </div>
+
+        <button id="menu-btn" class="sm:hidden text-gray-900 hover:text-gray-700 focus:outline-none">
+          <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M4 6h16M4 12h16m-7 6h7"></path>
+          </svg>
+        </button>
+      </div>
+
+      <div id="mobile-menu" class="sm:hidden space-y-2 mt-2">
+        <a href="#" class="block text-gray-900 hover:text-gray-700 px-4 py-2 text-sm font-medium">Today</a>
+        <a href="#" class="block text-gray-900 hover:text-gray-700 px-4 py-2 text-sm font-medium">Watch</a>
+        <a href="#" class="block text-gray-900 hover:text-gray-700 px-4 py-2 text-sm font-medium">Explore</a>
+        <a href="#" class="block text-gray-900 hover:text-gray-700 px-4 py-2 text-sm font-medium">About</a>
+        <a href="#" class="block text-gray-900 hover:text-gray-700 px-4 py-2 text-sm font-medium">Business</a>
+        <a href="#" class="block text-gray-900 hover:text-gray-700 px-4 py-2 text-sm font-medium">Blog</a>
+        <a href="/login" class="block bg-red-500 text-white px-4 py-2 rounded-lg font-medium">Log in</a>
+        <a href="/register" class="block bg-gray-200 px-4 py-2 rounded-lg font-medium">Register</a>
       </div>
     </div>
   </nav>
 
-  <!-- Hero Section -->
-  <main class="py-4 text-center">
-    <h1 class="text-4xl font-bold text-gray-900">Get Your Next</h1>
-    <p class="text-4xl font-bold text-red-500">Outfit Idea</p>
+  <main class="py-6 text-center">
+    <h1 class="text-3xl sm:text-4xl font-bold text-gray-900">Get Your Next</h1>
+    <p class="text-3xl sm:text-4xl font-bold text-red-500">Outfit Idea</p>
   </main>
 
-  <!-- Image Gallery -->
-  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 h-[70%] overflow-hidden">
-    <div class="grid grid-cols-5 gap-4 h-full">
-      <!-- Image 1 -->
-      <div class="w-full h-full">
-        <img
-          src="https://i.pinimg.com/474x/7f/16/28/7f162881a973f15d578c8803c01943a7.jpg"
-          alt="Jewelry"
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+      <div class="w-full aspect-w-1 aspect-h-1 sm:aspect-w-1 sm:aspect-h-1">
+        <img src="https://i.pinimg.com/474x/7f/16/28/7f162881a973f15d578c8803c01943a7.jpg" alt="Jewelry"
           class="rounded-lg shadow-lg w-full h-full object-cover">
       </div>
-      <!-- Image 2 -->
-      <div class="w-full h-full">
-        <img
-          src="https://i.pinimg.com/236x/84/9c/f2/849cf29b6880014fbbd60e881101a8d2.jpg"
-          alt="Couple in Traditional Attire"
+      <div class="w-full aspect-w-1 aspect-h-1 sm:aspect-w-1 sm:aspect-h-1">
+        <img src="https://i.pinimg.com/236x/84/9c/f2/849cf29b6880014fbbd60e881101a8d2.jpg" alt="Couple in Traditional Attire"
           class="rounded-lg shadow-lg w-full h-full object-cover">
       </div>
-      <!-- Image 3 -->
-      <div class="w-full h-full">
-        <img
-          src="https://i.pinimg.com/736x/a6/13/89/a613896ac253f9ee5ada8eb867e0d2f2.jpg"
-          alt="Man in Red Outfit"
+      <div class="w-full aspect-w-1 aspect-h-1 sm:aspect-w-1 sm:aspect-h-1">
+        <img src="https://i.pinimg.com/736x/a6/13/89/a613896ac253f9ee5ada8eb867e0d2f2.jpg" alt="Man in Red Outfit"
           class="rounded-lg shadow-lg w-full h-full object-cover">
       </div>
-      <!-- Image 4 -->
-      <div class="w-full h-full">
-        <img
-          src="https://i.pinimg.com/236x/7f/3a/d8/7f3ad868e5dfbe593d19cd3faaddf09b.jpg"
-          alt="Traditional Jewelry"
+      <div class="w-full aspect-w-1 aspect-h-1 sm:aspect-w-1 sm:aspect-h-1">
+        <img src="https://i.pinimg.com/236x/7f/3a/d8/7f3ad868e5dfbe593d19cd3faaddf09b.jpg" alt="Traditional Jewelry"
           class="rounded-lg shadow-lg w-full h-full object-cover">
       </div>
-      <!-- Image 5 -->
-      <div class="w-full h-full">
-        <img
-          src="https://i.pinimg.com/736x/68/b6/c9/68b6c9f0b4b6eb71089c4a98128a0216.jpg"
-          alt="Woman in Saree"
+      <div class="w-full aspect-w-1 aspect-h-1 sm:aspect-w-1 sm:aspect-h-1">
+        <img src="https://i.pinimg.com/736x/68/b6/c9/68b6c9f0b4b6eb71089c4a98128a0216.jpg" alt="Woman in Saree"
           class="rounded-lg shadow-lg w-full h-full object-cover">
       </div>
     </div>
   </section>
+
+  <script>
+    // Toggle mobile menu visibility
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.style.display = mobileMenu.style.display === 'none' ? 'block' : 'none';
+    });
+  </script>
 </body>
+
 </html>

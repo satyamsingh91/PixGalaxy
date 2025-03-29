@@ -11,15 +11,56 @@
     />
   </head>
   <body class="bg-gray-100">
+    <!-- Header/Navbar -->
     <header class="bg-white shadow-md">
       <div
-        class="container mx-auto flex justify-between items-center py-4 px-6"
+        class="container mx-auto flex justify-between items-center py-4 px-4 sm:px-6 lg:px-8"
       >
-        <div class="flex items-center space-x-6">
+        <!-- Left Section: Logo & Create Link -->
+        <div class="flex items-center space-x-4 sm:space-x-6">
           <a href="#" class="text-red-500 font-bold text-xl">PixGalaxy</a>
-          <a href="/createpin" class="text-gray-700 hover:text-black">Create</a>
+          <a
+            href="/createpin"
+            class="text-gray-700 hover:text-black hidden sm:block"
+            >Create</a
+          >
         </div>
-        <div class="flex items-center space-x-6">
+
+        <!-- Desktop Menu -->
+        <div class="hidden sm:flex items-center space-x-4 lg:space-x-6">
+          <a href="/show/posts"
+            ><button class="text-gray-700 text-sm sm:text-base">
+              Your Pins
+            </button></a
+          >
+          <a href="/feed"
+            ><button class="text-gray-700 text-sm sm:text-base">Feed</button></a
+          >
+          <a href="/profile"
+            ><button class="text-gray-700 text-sm sm:text-base">
+              Profile
+            </button></a
+          >
+          <a href="/logout"
+            ><button class="text-gray-700 text-sm sm:text-base">
+              Logout
+            </button></a
+          >
+        </div>
+
+        <!-- Hamburger Icon for Mobile -->
+        <button
+          id="menu-toggle"
+          class="sm:hidden text-gray-700 focus:outline-none"
+        >
+          <i class="ri-menu-3-line text-2xl"></i>
+        </button>
+      </div>
+
+      <!-- Mobile Menu (Hidden by Default) -->
+      <div id="mobile-menu" class="sm:hidden hidden bg-white shadow-md">
+        <div class="flex flex-col items-center space-y-4 py-4">
+          <a href="/createpin" class="text-gray-700 hover:text-black">Create</a>
           <a href="/show/posts"
             ><button class="text-gray-700">Your Pins</button></a
           >
@@ -30,54 +71,67 @@
       </div>
     </header>
 
-    <main class="container mx-auto mt-8 px-6">
+    <!-- Main Content -->
+    <main class="container mx-auto mt-8 px-4 sm:px-6 lg:px-8">
       <div class="text-center relative">
+        <!-- Profile Image Section -->
         <div
-          class="w-24 h-24 mx-auto bg-gray-300 rounded-full overflow-hidden relative"
+          class="w-20 h-20 sm:w-24 sm:h-24 mx-auto bg-gray-300 rounded-full overflow-hidden relative"
         >
-          <!-- Display profile image correctly -->
           <img
             src="<%= user.image.startsWith('http') ? user.image : '/images/' + user.image %>"
             alt="Profile Image"
             class="w-full h-full object-cover"
           />
-
-          <!-- Edit Profile Picture Icon -->
+          <!-- Edit Icon -->
           <button
             id="uploadicon"
-            class="absolute bottom-0 right-0 bg-white text-gray-700 rounded-full p-2 shadow-lg hover:bg-gray-200"
+            class="absolute bottom-0 right-0 bg-white text-gray-700 rounded-full p-1 sm:p-2 shadow-lg hover:bg-gray-200"
             title="Edit Profile Picture"
           >
             <i class="ri-pencil-line"></i>
           </button>
 
-          <!-- Hidden Form for Uploading Profile Image -->
-          <div
+          <!-- Hidden Form for Profile Upload -->
+          <form
             id="uploadform"
-            class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden"
+            action="/fileupload"
+            method="post"
+            enctype="multipart/form-data"
+            class="hidden"
           >
-            <form
-              action="/fileupload"
-              method="post"
-              enctype="multipart/form-data"
-            >
-              <input type="file" name="profileImage" class="hidden" />
-            </form>
-          </div>
+            <input
+              type="file"
+              name="profileImage"
+              id="fileInput"
+              class="hidden"
+            />
+          </form>
         </div>
-        <h1 class="text-2xl font-bold mt-4"><%= user.name %></h1>
-        <p class="text-gray-600"><%= user.email %></p>
+
+        <!-- User Info -->
+        <h1 class="text-xl sm:text-2xl font-bold mt-4"><%= user.name %></h1>
+        <p class="text-gray-600 text-sm sm:text-base"><%= user.email %></p>
       </div>
 
+      <!-- Navigation Buttons Section -->
       <div class="mt-8">
-        <div class="flex justify-center border-b">
-          <button class="px-4 py-2 text-red-500 border-b-2 border-red-500">
+        <div
+          class="flex justify-center border-b space-x-2 sm:space-x-4 overflow-x-auto"
+        >
+          <button
+            class="px-3 sm:px-4 py-2 text-red-500 border-b-2 border-red-500"
+          >
             Created
           </button>
         </div>
+
+        <!-- Create Pin Button -->
         <div class="text-center mt-4">
           <a href="/createpin"
-            ><button class="bg-red-500 text-white px-4 py-2 rounded-full mt-4">
+            ><button
+              class="bg-red-500 text-white px-4 py-2 rounded-full mt-4 hover:bg-red-600 transition"
+            >
               Create Pin
             </button></a
           >
@@ -85,20 +139,28 @@
       </div>
     </main>
 
+    <!-- JavaScript Section -->
     <script>
+      // Toggle Mobile Menu
+      document
+        .querySelector("#menu-toggle")
+        .addEventListener("click", function () {
+          const menu = document.querySelector("#mobile-menu");
+          menu.classList.toggle("hidden");
+        });
+
+      // Handle Profile Image Upload
       document
         .querySelector("#uploadicon")
         .addEventListener("click", function () {
-          const fileInput = document.querySelector(
-            "#uploadform input[type='file']"
-          );
+          const fileInput = document.querySelector("#fileInput");
           fileInput.click();
         });
 
       document
-        .querySelector("#uploadform input[type='file']")
+        .querySelector("#fileInput")
         .addEventListener("change", function () {
-          this.closest("form").submit();
+          document.querySelector("#uploadform").submit();
         });
     </script>
   </body>

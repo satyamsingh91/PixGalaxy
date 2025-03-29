@@ -1,119 +1,236 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Create Pin</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-100">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Pin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-gray-100">
+    <!-- Header/Navbar -->
     <header class="bg-white shadow-md">
-        <div class="container mx-auto flex justify-between items-center py-4 px-6">
-            <div class="flex items-center space-x-6">
-                <a href="#" class="text-red-500 font-bold text-xl">PixGalaxy</a>
-                <!-- <a href="/home" class="text-gray-700 hover:text-black">Home</a> -->
-                <!-- <a href="#" class="text-gray-700 hover:text-black">Explore</a> -->
-                <a href="/createpin" class="text-gray-700 hover:text-black">Create</a>
-            </div>
-            <div class="flex items-center space-x-6">
-                <!-- <input type="text" placeholder="Search your Pins" class="border rounded-full px-4 py-1 focus:outline-none"> -->
-                <a href="/show/posts"><button class="text-gray-700">Your Pins</button></a>
-  
-                <a href="/feed"><button class="text-gray-700">Feed</button></a>
-                <a href="/profile"><button class="text-gray-700">Profile</button></a>
-                <!-- Logout Button -->
-                <a href="/logout"><button class="text-gray-700">Logout</button></a>
-            </div>
+      <div
+        class="container mx-auto flex justify-between items-center py-4 px-4 sm:px-6 lg:px-8"
+      >
+        <!-- Logo and Create Link -->
+        <div class="flex items-center space-x-4 sm:space-x-6">
+          <a href="#" class="text-red-500 font-bold text-xl">PixGalaxy</a>
+          <a
+            href="/createpin"
+            class="text-gray-700 hover:text-black hidden sm:block"
+            >Create</a
+          >
         </div>
+
+        <!-- Desktop Menu -->
+        <div class="hidden sm:flex items-center space-x-4 lg:space-x-6">
+          <a href="/show/posts"
+            ><button
+              class="text-gray-700 px-3 py-1 sm:px-4 sm:py-2 hover:bg-gray-100 rounded-md transition"
+            >
+              Your Pins
+            </button></a
+          >
+          <a href="/feed"
+            ><button
+              class="text-gray-700 px-3 py-1 sm:px-4 sm:py-2 hover:bg-gray-100 rounded-md transition"
+            >
+              Feed
+            </button></a
+          >
+          <a href="/profile"
+            ><button
+              class="text-gray-700 px-3 py-1 sm:px-4 sm:py-2 hover:bg-gray-100 rounded-md transition"
+            >
+              Profile
+            </button></a
+          >
+          <a href="/logout"
+            ><button
+              class="text-gray-700 px-3 py-1 sm:px-4 sm:py-2 hover:bg-gray-100 rounded-md transition"
+            >
+              Logout
+            </button></a
+          >
+        </div>
+
+        <!-- Hamburger Menu for Mobile -->
+        <button
+          id="menu-toggle"
+          class="sm:hidden text-gray-700 focus:outline-none"
+        >
+          <i class="ri-menu-3-line text-2xl"></i>
+        </button>
+      </div>
+
+      <!-- Mobile Menu (Hidden by Default) -->
+      <div id="mobile-menu" class="sm:hidden hidden bg-white shadow-md">
+        <div class="flex flex-col items-center space-y-4 py-4">
+          <a href="/createpin"
+            ><button
+              class="text-gray-700 w-full text-sm py-2 hover:bg-gray-100 rounded-md transition"
+            >
+              Create
+            </button></a
+          >
+          <a href="/show/posts"
+            ><button
+              class="text-gray-700 w-full text-sm py-2 hover:bg-gray-100 rounded-md transition"
+            >
+              Your Pins
+            </button></a
+          >
+          <a href="/feed"
+            ><button
+              class="text-gray-700 w-full text-sm py-2 hover:bg-gray-100 rounded-md transition"
+            >
+              Feed
+            </button></a
+          >
+          <a href="/profile"
+            ><button
+              class="text-gray-700 w-full text-sm py-2 hover:bg-gray-100 rounded-md transition"
+            >
+              Profile
+            </button></a
+          >
+          <a href="/logout"
+            ><button
+              class="text-gray-700 w-full text-sm py-2 hover:bg-gray-100 rounded-md transition"
+            >
+              Logout
+            </button></a
+          >
+        </div>
+      </div>
     </header>
 
-  <div class="flex items-start justify-center py-10">
-    <!-- Sidebar -->
-    <div class="w-1/4 bg-white shadow-lg rounded-lg p-6">
-      <h2 class="text-lg font-semibold mb-4">Pin Drafts</h2>
-      <button class="w-full bg-red-500 text-white font-medium py-2 px-4 rounded-md">
-        Create new
-      </button>
-    </div>
-
-    <!-- Main Form -->
-    <div class="w-3/4 ml-10 bg-white shadow-lg rounded-lg p-8">
-      <h2 class="text-2xl font-semibold mb-6">Create Pin</h2>
-      <form class="space-y-6" action="/createpin" method="post" enctype="multipart/form-data">
-        <!-- Image Upload -->
-        <div class="border-2 border-dashed border-gray-300 rounded-lg h-64 flex items-center justify-center">
-          <label
-            for="file-upload"
-            class="cursor-pointer text-gray-500 flex flex-col items-center"
-          >
-            <svg
-              class="w-10 h-10 mb-2"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M3 16l5-5m0 0l5 5m-5-5v12"
-              />
-            </svg>
-            <span>Choose a file or drag and drop it here</span>
-            <input
-              id="file-upload"
-              type="file"
-              class="hidden"
-              accept="image/*"
-              name="postimage"
-            />
-          </label>
-        </div>
-        <p class="text-sm text-gray-400">
-          We recommend using high-quality JPG files less than 20 MB or MP4 files
-          less than 200 MB.
-        </p>
-
-        <!-- Title -->
-        <div>
-          <label class="block text-gray-700 font-medium mb-2" for="title">
-            Title
-          </label>
-          <input
-            type="text"
-            id="title"
-            name="title"
-            class="w-full border-gray-300 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500"
-            placeholder="Add a title"
-          />
-        </div>
-
-        <!-- Description -->
-        <div>
-          <label
-            class="block text-gray-700 font-medium mb-2"
-            for="description"
-          >
-            Description
-          </label>
-          <textarea
-            id="description"
-            name="description"
-            rows="3"
-            class="w-full border-gray-300 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500"
-            placeholder="Add a detailed description"
-          ></textarea>
-        </div>
-        <!-- Submit -->
-        <button
-          type="submit"
-          class="w-full bg-red-500 text-white font-medium py-2 px-4 rounded-md"
+    <!-- Main Content Wrapper -->
+    <div class="container mx-auto p-4 sm:p-8">
+      <div
+        class="flex flex-col sm:flex-row items-start justify-center gap-6"
+      >
+        <!-- Sidebar -->
+        <div
+          class="w-full sm:w-1/3 bg-white shadow-lg rounded-lg p-6"
         >
-          Save
-        </button>
-      </form>
+          <h2 class="text-lg font-semibold mb-4">Pin Drafts</h2>
+          <button
+            class="w-full bg-red-500 text-white font-medium py-2 px-4 rounded-md sm:text-base text-sm hover:bg-red-600 transition"
+          >
+            Create New
+          </button>
+        </div>
+
+        <!-- Main Form -->
+        <div
+          class="w-full sm:w-2/3 bg-white shadow-lg rounded-lg p-6 sm:p-8"
+        >
+          <h2 class="text-2xl font-semibold mb-6">Create Pin</h2>
+          <form
+            class="space-y-6"
+            action="/createpin"
+            method="post"
+            enctype="multipart/form-data"
+          >
+            <!-- Image Upload -->
+            <div
+              class="border-2 border-dashed border-gray-300 rounded-lg h-48 sm:h-64 flex items-center justify-center"
+            >
+              <label
+                for="file-upload"
+                class="cursor-pointer text-gray-500 flex flex-col items-center"
+              >
+                <svg
+                  class="w-10 h-10 mb-2"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M3 16l5-5m0 0l5 5m-5-5v12"
+                  />
+                </svg>
+                <span class="text-sm sm:text-base"
+                  >Choose a file or drag and drop it here</span
+                >
+                <input
+                  id="file-upload"
+                  type="file"
+                  class="hidden"
+                  accept="image/*"
+                  name="postimage"
+                />
+              </label>
+            </div>
+            <p class="text-sm text-gray-400">
+              We recommend using high-quality JPG files less than 20 MB.
+            </p>
+
+            <!-- Title -->
+            <div>
+              <label
+                class="block text-gray-700 font-medium mb-2"
+                for="title"
+              >
+                Title
+              </label>
+              <input
+                type="text"
+                id="title"
+                name="title"
+                class="w-full border-gray-300 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500 text-sm sm:text-base px-3 py-2"
+                placeholder="Add a title"
+                required
+              />
+            </div>
+
+            <!-- Description -->
+            <div>
+              <label
+                class="block text-gray-700 font-medium mb-2"
+                for="description"
+              >
+                Description
+              </label>
+              <textarea
+                id="description"
+                name="description"
+                rows="3"
+                class="w-full border-gray-300 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500 text-sm sm:text-base px-3 py-2"
+                placeholder="Add a detailed description"
+              ></textarea>
+            </div>
+
+            <!-- Submit Button -->
+            <button
+              type="submit"
+              class="w-full bg-red-500 text-white font-medium py-2 sm:py-3 px-4 sm:px-6 rounded-md text-sm sm:text-base hover:bg-red-600 transition"
+            >
+              Save
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
-  </div>
-</body>
+
+    <!-- JavaScript for Menu Toggle -->
+    <script>
+      // Toggle Mobile Menu
+      document
+        .querySelector("#menu-toggle")
+        .addEventListener("click", function () {
+          const menu = document.querySelector("#mobile-menu");
+          menu.classList.toggle("hidden");
+        });
+    </script>
+  </body>
 </html>
